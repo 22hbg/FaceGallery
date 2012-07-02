@@ -1,4 +1,3 @@
-
 Facebook Gallery
 ======================
 
@@ -30,6 +29,8 @@ PARAMETER | Description  						| Default
 - col	  | set the number of column					| 3
 - margin  | set margin in pixel for each photo by css			| 1
 - padding | set padding in pixel for each photo by css			| 1
-- fanxybox| not working - in development - use fancybox for popups	| true
+
 ---------------------------------------------------------------------------------
+
+
 
