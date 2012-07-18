@@ -47,8 +47,7 @@ $this->addHook('configuration_add', 'facegallery', array(
 ));
 
 
-//$PIVOTX['template']->register_block('facegallery', 'smarty_facegallery');
-$PIVOTX['template']->register_function('facegallery', 'smarty_facegallery');
+$PIVOTX['template']->register_block('facegallery', 'smarty_facegallery');
 
 
 function smarty_facegallery($params, $text, &$smarty)
