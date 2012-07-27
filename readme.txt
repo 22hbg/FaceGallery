@@ -15,9 +15,10 @@ Primary use for automatic gallery for entry or page.
 ChangeLog:
 
 0.2 - 2012-07-27
-	Changed Block to Function
-	No need to put closing tag
+        Changed Block to Function
+        No need to put closing tag
 
 0.1 - 2012-06-30
-	First Working Release
+        First Working Release
+
 
