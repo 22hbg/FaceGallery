@@ -1,8 +1,10 @@
 Facebook Gallery
 ======================
 
-This extension allows you to insert a Facebook Gallery on your pages and
+This extension allows you to insert a Facebook Page Gallery on your pages and
 entries. 
+
+
 
 
 Usage

@@ -41,28 +41,25 @@ $facegallery_config = array(
 	} //$facegallery_config as $key => $value
 	
 
+
+//$PIVOTX['template']->register_block('facegallery', 'smarty_facegallery');
+$PIVOTX['template']->register_function('facegallery', 'smarty_facegallery');
+
 $this->addHook('configuration_add', 'facegallery', array(
 	"facegalleryAdmin",
 	"FaceGallery"
 ));
 
 
-$PIVOTX['template']->register_block('facegallery', 'smarty_facegallery');
 
 
-function smarty_facegallery($params, $text, &$smarty)
+function smarty_facegallery($params, &$smarty)
 {
 	global $PIVOTX;
 	global $facegallery_config;
 	global $path;
 	global $configdata;	
 
-	
-	
-	
-	if (!isset($text)) {
-		return "";
-	} //!isset($text)
 	
 	$params = cleanParams($params);
 	
