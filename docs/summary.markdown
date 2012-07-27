@@ -17,7 +17,7 @@ the default gallery, with the default options selected.
 Several parameters are available to customize the button. For example, to insert
 a simpler button, use:
 
-    [[ facegallery col=3 max=10 ]] [[ /facegallery ]]
+    [[ facegallery col=3 max=10 ]]
 
 The available other parameters are:
 

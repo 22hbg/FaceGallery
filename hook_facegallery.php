@@ -1,11 +1,11 @@
 <?php
 // - Extension: FaceBook Gallery 
 // - Identifier: facegallery
-// - Version: 0.1
+// - Version: 0.2
 // - Author: Matteo Tumidei
-// - Email: mtumidei@gmail.com
+// - Email: matteo@22hbgcom
 // - Description: Make gallery of images from facebook album Derived from Dir Gallery extension.
-// - Date: 2012-06-30           
+// - Date: 2012-07-27           
 global $facegallery_config;
 global $path;
 global $configdata;
