@@ -21,18 +21,30 @@ a simpler button, use:
 
 The available other parameters are:
 
-PARAMETER | Description  						| Default
----------------------------------------------------------------------------------
-- thumbw  | set your thumbnails width (string)				| 70
-- thumbh  | set your thumbnails height (string)				| 70
-- rounded | apply 6px border radius to thumbnail by css (boolean) 	| true
-- reverse | display photos in reverse order (boolean)			| false
-- max	  | set max number of photos to display, -1 = no limit (integer)| -1
-- col	  | set the number of column					| 3
-- margin  | set margin in pixel for each photo by css			| 1
-- padding | set padding in pixel for each photo by css			| 1
-
----------------------------------------------------------------------------------
-
+PARAMETER
+- thumbw
+	set your thumbnails width (string)			
+	Default: 70
+- thumbh  
+	set your thumbnails height (string)
+	Default: 70
+- rounded
+	apply 6px border radius to thumbnail by css (boolean)
+	Default: true
+- reverse
+	display photos in reverse order (boolean)
+	Default: false
+- max
+	set max number of photos to display, -1 = no limit (integer)
+	Default: -1
+- col
+	set the number of column
+	Default: 3
+- margin
+	set margin in pixel for each photo by css
+	Default: 1
+- padding
+	set padding in pixel for each photo by css
+	Default: 1
 
 
