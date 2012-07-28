@@ -83,7 +83,7 @@ function smarty_facegallery($params, &$smarty)
         
         
         $output .= "
-    <script src=\"" . $path . "facegallery/src/jquery.fbpagephotos.js\"></script>
+    <script src=\"" . $path . "facegallery/src/jquery.fbpagephotos.min.js\"></script>
     <script language=\"javascript\">
 (function() {
 
