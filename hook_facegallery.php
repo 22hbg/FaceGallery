@@ -111,7 +111,8 @@ function smarty_facegallery($params, &$smarty)
            $output .="
                 var w = " . $thumbw . ";
                 var h = " . $thumbh . ";
-                var thumb = \"" . $timthumb . "?src=\"+photo.source+\"&w=\"+w+\"&h=\"+h+\"&zc=1&q=90\"; 
+                var small = photo.source.slice(0,photo.source.length-5) + 's.jpg';
+                var thumb = \"" . $timthumb . "?src=\"+small+\"&w=\"+w+\"&h=\"+h+\"&zc=1&q=90\";                 
             ";
             
             if (!$reverse) {
