@@ -4,8 +4,7 @@ Facebook Gallery
 This extension allows you to insert a Facebook Page Gallery on your pages and
 entries. 
 
-
-
+Required: JQuery 1.7
 
 Usage
 -----

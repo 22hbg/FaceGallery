@@ -196,6 +196,7 @@ function facegalleryAdmin(&$form_html)
                 'label' => __('Album ID')
         ));
         
+
         $form->add(array(
                 'type' => 'hidden',
                 'name' => 'facegallery_album_id'
@@ -206,34 +207,50 @@ function facegalleryAdmin(&$form_html)
                 'text' => '
                     <script src="' . $path . 'facegallery/src/jquery.fbpagephotos.js"></script>
     <script language="javascript">
-(function() {
-
-    $(\'#facegallery_album_sel\').FBPagePhotos({
-        page_id: "' . $configdata['facegallery_page_id'] . '"
-        , albums_cb: function(albums, next) {
-            var select = $(\'#facegallery_album_sel\');
-
-            $.each(albums, function(i, album) {
-                select.append($(\'<option>\').attr(\'id\', album.id).attr(\'value\', i).text(album.name));
-            });
-
-            select.change(function() {
-                var sel = document.getElementById(\'facegallery_album_sel\');
-                aid = sel.options[sel.selectedIndex].getAttribute(\'id\');
+    
+    function album() {
+              var facegallery_val = $(\'#facegallery_page_id\').val();
+    
+          $(\'#facegallery_album_sel\').FBPagePhotos({
+              page_id: facegallery_val
+            , albums_cb: function(albums, next) {
+                var select = $(\'#facegallery_album_sel\');
+      
+                $.each(albums, function(i, album) {
+                  select.append($(\'<option>\').attr(\'id\', album.id).attr(\'value\', i).text(album.name));
+                });
+      
+                select.change(function() {
+                  var sel = document.getElementById(\'facegallery_album_sel\');
+                  aid = sel.options[sel.selectedIndex].getAttribute(\'id\');
+                  
+                  $(\'#facegallery_album_id\').val(aid);
+                });
+      
+            }
+            , error: function(msg) {
+                console.error("FB Error:", msg.message);
                 
-                $(\'#facegallery_album_id\').val(aid);
-            });
+                
+            }
+          });
+    }
+    
+    function clearalbum() {
+            $(\'select#facegallery_album_sel\').children().remove().end();
+            album();
+    }
+    
+    (function() {
 
-        }
-        , error: function(msg) {
-            console.error("FB Error:", msg.message);
-            
-            
-        }
-    });
+              $(\'#facegallery_page_id\').val(\'' . $configdata['facegallery_page_id'] . '\');
+
+          clearalbum();
+          $(\'#facegallery_page_id\').after(\'<div style="display: inline; float: right; margin-right: 250px;" class="buttons"><button type="button" onclick="clearalbum();" id="update_album">OK</button></div>\');
+    
+    })();
 
     
-})();
 </script>
 '
         ));
