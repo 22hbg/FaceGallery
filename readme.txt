@@ -4,6 +4,9 @@ Version: 0.2
 Date: 2012-07-27
 Requirements: PivotX 2.3.3, a Facebook Public Page 
 
+IMPORTANT: You have to ensure ALLOW_EXTERNAL in /pivotx/includes/timthumb.php and
+           add 'fbcdn.net' in $ALLOWED_SITES.
+
 Author: Matteo Tumidei
 E-mail: matteo@22hbg.com
 

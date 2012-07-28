@@ -6,6 +6,9 @@ entries.
 
 Required: JQuery 1.7
 
+IMPORTANT: You have to ensure ALLOW_EXTERNAL in /pivotx/includes/timthumb.php and
+           add 'fbcdn.net' in $ALLOWED_SITES.
+
 Usage
 -----
 
