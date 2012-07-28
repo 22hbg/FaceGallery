@@ -81,27 +81,28 @@ function smarty_facegallery($params, &$smarty)
         
         $timthumb = $configdata['pivotx_url'] . 'includes/timthumb.php';
         
+        
         $output .= "
     <script src=\"" . $path . "facegallery/src/jquery.fbpagephotos.js\"></script>
     <script language=\"javascript\">
 (function() {
 
 
-    $.FBPagePhotos({
+    jQuery.FBPagePhotos({
         page_id: \"" . $configdata['facegallery_page_id'] . "\"
         ,albums_cb: function(albums, next) {
                 next(albums[" . $configdata['facegallery_album_sel'] . "]);        // you could let the user select here, for simplicity I am just choosing the first album
         }
         , photos_cb: function(photos) {
-            var e = $('#photos-3')
-                , list = $('<ul></ul>')
-                , img = $('<img>');
+            var e = jQuery('#photos-3')
+                , list = jQuery('<ul></ul>')
+                , img = jQuery('<img>');
 
             e.append(list, img);
  
             ii = 1;
 
-            $.each(photos, function(i, photo) {
+            jQuery.each(photos, function(i, photo) {
            ";
            
            if ($max) { 
@@ -114,35 +115,35 @@ function smarty_facegallery($params, &$smarty)
             ";
             
             if (!$reverse) {
-                            $output .= "\nlist.append($('<a></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
-                            $output .= "\n$('#link_'+i).prepend($('<img>').attr('id', 'photo_'+i).attr('src', thumb));";                    
+                            $output .= "\nlist.append(jQuery('<a></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
+                            $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";                    
             } else {
-                            $output .= "\nlist.prepend($('<a></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
-                            $output .= "\n$('#link_'+i).prepend($('<img>').attr('id', 'photo_'+i).attr('src', thumb));";          
+                            $output .= "\nlist.prepend(jQuery('<a></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
+                            $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";          
             }
             
-            if ($fancybox) { $output .= "\n$('a#link_'+i).addClass('gallery_image');"; }
+            if ($fancybox) { $output .= "\njQuery('a#link_'+i).addClass('gallery_image');"; }
             $output .="
             
             
-                $('img#photo_'+i).css('width', w + 'px');
-                $('img#photo_'+i).css('height', h + 'px');
+                jQuery('img#photo_'+i).css('width', w + 'px');
+                jQuery('img#photo_'+i).css('height', h + 'px');
                 
-                if(ii==" . $col . "){ list.append($('<br>')); ii=0; }
+                if(ii==" . $col . "){ list.append(jQuery('<br>')); ii=0; }
                 ";
         
         
         
         if ($rounded == true) {
-                $output .= "$('img#photo_'+i).css('border-radius', '6px');";
+                $output .= "jQuery('img#photo_'+i).css('border-radius', '6px');";
         } //$rounded
         
         if ($margin) {
-                $output .= "\n$('img#photo_'+i).css('margin', '" . $margin . "px');";
+                $output .= "\njQuery('img#photo_'+i).css('margin', '" . $margin . "px');";
         } //$margin
         
         if ($padding) {
-                $output .= "\n$('img#photo_'+i).css('padding', '" . $padding . "px');";
+                $output .= "\njQuery('img#photo_'+i).css('padding', '" . $padding . "px');";
         } //$padding
         
         $output .= "
@@ -209,22 +210,22 @@ function facegalleryAdmin(&$form_html)
     <script language="javascript">
     
     function album() {
-              var facegallery_val = $(\'#facegallery_page_id\').val();
+              var facegallery_val = jQuery(\'#facegallery_page_id\').val();
     
-          $(\'#facegallery_album_sel\').FBPagePhotos({
+          jQuery(\'#facegallery_album_sel\').FBPagePhotos({
               page_id: facegallery_val
             , albums_cb: function(albums, next) {
-                var select = $(\'#facegallery_album_sel\');
+                var select = jQuery(\'#facegallery_album_sel\');
       
-                $.each(albums, function(i, album) {
-                  select.append($(\'<option>\').attr(\'id\', album.id).attr(\'value\', i).text(album.name));
+                jQuery.each(albums, function(i, album) {
+                  select.append(jQuery(\'<option>\').attr(\'id\', album.id).attr(\'value\', i).text(album.name));
                 });
       
                 select.change(function() {
                   var sel = document.getElementById(\'facegallery_album_sel\');
                   aid = sel.options[sel.selectedIndex].getAttribute(\'id\');
                   
-                  $(\'#facegallery_album_id\').val(aid);
+                  jQuery(\'#facegallery_album_id\').val(aid);
                 });
       
             }
@@ -237,16 +238,16 @@ function facegalleryAdmin(&$form_html)
     }
     
     function clearalbum() {
-            $(\'select#facegallery_album_sel\').children().remove().end();
+            jQuery(\'select#facegallery_album_sel\').children().remove().end();
             album();
     }
     
     (function() {
 
-              $(\'#facegallery_page_id\').val(\'' . $configdata['facegallery_page_id'] . '\');
+              jQuery(\'#facegallery_page_id\').val(\'' . $configdata['facegallery_page_id'] . '\');
 
           clearalbum();
-          $(\'#facegallery_page_id\').after(\'<div style="display: inline; float: right; margin-right: 250px;" class="buttons"><button type="button" onclick="clearalbum();" id="update_album">OK</button></div>\');
+          jQuery(\'#facegallery_page_id\').after(\'<div style="display: inline; float: right; margin-right: 250px;" class="buttons"><button type="button" onclick="clearalbum();" id="update_album">OK</button></div>\');
     
     })();
 
