@@ -1,9 +1,9 @@
 <?php
-// - Extension: FaceBook Gallery 
+// - Extension: Facebook Gallery 
 // - Identifier: facegallery
 // - Version: 0.2
 // - Author: Matteo Tumidei
-// - Email: matteo@22hbgcom
+// - Email: matteo@22hbg.com
 // - Description: Make gallery of images from facebook album Derived from Dir Gallery extension.
 // - Date: 2012-07-27           
 global $facegallery_config;
@@ -76,14 +76,30 @@ function smarty_facegallery($params, &$smarty)
         $max     = getDefault($params['max'], '10');
         $reverse = getDefault($params['reverse'], false);
         $fancybox = getDefault($params['thickbox'], false);
+       
+        
+        if ($thumbw <= 0) { $thumbw = 70; }
+        if ($thumbh <= 0) { $thumbw = 70; }
+        if ($rounded != true || $rounded != false) { $rounded = true; }
+        if ($margin <= 0) { $margin = 1; }
+        if ($padding <= 0) { $padding = 1; }
+        if ($col <= 0) { $col = 3; }
+        if ($max <= 0) { $thumbw = -1; }
+        if ($reverse != true || $reverse != false ) { $reverse = false; }
+        if ($fancybox != true || $fancybox != false) { $fancybox = false; }
         
         $output = '';
         
         $timthumb = $configdata['pivotx_url'] . 'includes/timthumb.php';
-        
+       
+        OutputSystem::instance()->addCode(
+            'fancybox-js-easing',
+            OutputSystem::LOC_BODYSTART,
+            'script',
+            array('src'=>$path.'facegallery/src/jquery.fbpagephotos.min.js','_priority'=>OutputSystem::PRI_NORMAL+20)
+        ); 
         
         $output .= "
-    <script src=\"" . $path . "facegallery/src/jquery.fbpagephotos.min.js\"></script>
     <script language=\"javascript\">
 (function() {
 
@@ -186,7 +202,7 @@ function facegalleryAdmin(&$form_html)
                 'label' => __('Page ID/Name'),
                 'value' => '',
                 'error' => __('Insert a valid Page ID/Name'),
-                'text' => __('The ID (or name) of your facebook page. (e.g. 40796308305)'),
+                'text' => __('The ID (or name) of your facebook page <br /> (e.g. 40796308305)'),
                 'size' => 30,
                 'isrequired' => 1,
                 'validation' => 'string|minlen=1|maxlen=80'

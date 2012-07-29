@@ -4,52 +4,74 @@ Facebook Gallery
 This extension allows you to insert a Facebook Page Gallery on your pages and
 entries. 
 
-Required: JQuery 1.7
+Required: Facebook Page, JQuery 1.7
 
-IMPORTANT: You have to ensure ALLOW_EXTERNAL in /pivotx/includes/timthumb.php and
-           add 'fbcdn.net' in $ALLOWED_SITES.
+How to create your Facebook Page? 
+https://www.facebook.com/pages/create.php
+
+How to get Your page ID?
+http://rieglerova.net/how-to-get-a-facebook-fan-page-id/
+
+IMPORTANT: You have to ensure ALLOW_EXTERNAL is set to TRUE in /pivotx/includes/timthumb.php and
+           add the following lines to the end of your /pivotx/includes/timthumb-config.php
+
+*********************************************
+// Extension FaceGallery add fbcdn.net:
+$ALLOWED_SITES = array (
+       'flickr.com',
+       'staticflickr.com',
+       'picasa.com',
+       'img.youtube.com',
+       'upload.wikimedia.org',
+       'photobucket.com',
+       'imgur.com',
+       'imageshack.us',
+       'tinypic.com',
+       'fbcdn.net',
+);
+*********************************************
+
 
 Installation:
+======================
 Unzip and copy to directory /pivotx/extensions/facegallery
 
 Usage
------
-
+======================
 To use the gallery in its simplest form, just add `[[facegallery]]` in the
 template of your entrypage, in a weblog entry, or on a page. This will insert
 the default gallery, with the default options selected.
 
-Several parameters are available to customize the button. For example, to insert
-a simpler button, use:
-
     [[ facegallery col=3 max=10 ]]
 
-The available other parameters are:
 
 PARAMETER
+======================
+The available other parameters are:
+
 - thumbw
-        set your thumbnails width (string)                      
-        Default: 70
+  - set your thumbnails width (string)                      
+  - Default: 70
 - thumbh  
-        set your thumbnails height (string)
-        Default: 70
+  - set your thumbnails height (string)
+  - Default: 70
 - rounded
-        apply 6px border radius to thumbnail by css (boolean)
-        Default: true
+   - apply 6px border radius to thumbnail by css (boolean)
+   - Default: true
 - reverse
-        display photos in reverse order (boolean)
-        Default: false
+   - display photos in reverse order (boolean)
+   - Default: false
 - max
-        set max number of photos to display, -1 = no limit (integer)
-        Default: -1
+   - set max number of photos to display, -1 = no limit (integer)
+   - Default: -1
 - col
-        set the number of column
-        Default: 3
+   - set the number of column
+   - Default: 3
 - margin
-        set margin in pixel for each photo by css
-        Default: 1
+   - set margin in pixel for each photo by css
+   - Default: 1
 - padding
-        set padding in pixel for each photo by css
-        Default: 1
+   - set padding in pixel for each photo by css
+   - Default: 1
 
 

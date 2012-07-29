@@ -4,12 +4,33 @@ Version: 0.2
 Date: 2012-07-27
 Requirements: PivotX 2.3.3, a Facebook Public Page 
 
-
 Author: Matteo Tumidei
 E-mail: matteo@22hbg.com
 
-IMPORTANT: You have to ensure ALLOW_EXTERNAL in /pivotx/includes/timthumb.php and
-           add 'fbcdn.net' in $ALLOWED_SITES.
+How to create your Facebook Page? 
+https://www.facebook.com/pages/create.php
+
+How to get Your page ID?
+http://rieglerova.net/how-to-get-a-facebook-fan-page-id/
+
+IMPORTANT: You have to ensure ALLOW_EXTERNAL is set to TRUE in /pivotx/includes/timthumb.php and
+           add the following lines to the end of your /pivotx/includes/timthumb-config.php
+
+*********************************************
+// Extension FaceGallery add fbcdn.net:
+$ALLOWED_SITES = array (
+       'flickr.com',
+       'staticflickr.com',
+       'picasa.com',
+       'img.youtube.com',
+       'upload.wikimedia.org',
+       'photobucket.com',
+       'imgur.com',
+       'imageshack.us',
+       'tinypic.com',
+       'fbcdn.net',
+);
+*********************************************
 
 Description:
 Fetch Facebook Page albums. 
