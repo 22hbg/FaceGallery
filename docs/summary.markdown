@@ -9,6 +9,9 @@ Required: Facebook Page, JQuery 1.7
 How to create your Facebook Page? 
 https://www.facebook.com/pages/create.php
 
+How to create Albums?
+https://www.facebook.com/help/?faq=174641285926169
+
 How to get Your page ID?
 http://rieglerova.net/how-to-get-a-facebook-fan-page-id/
 
@@ -38,16 +41,15 @@ Unzip and copy to directory /pivotx/extensions/facegallery
 
 Usage
 ======================
-To use the gallery in its simplest form, just add `[[facegallery]]` in the
-template of your entrypage, in a weblog entry, or on a page. This will insert
-the default gallery, with the default options selected.
+To use the gallery in its simplest form, just add [[facegallery]] to your template or directly in an entry or page.
+This will insert the default gallery, with the default options selected.
 
     [[ facegallery col=3 max=10 ]]
 
 
-PARAMETER
+Parameters
 ======================
-The available other parameters are:
+The available parameters are:
 
 - thumbw
   - set your thumbnails width (string)                      
@@ -68,10 +70,10 @@ The available other parameters are:
    - set the number of column
    - Default: 3
 - margin
-   - set margin in pixel for each photo by css
+   - set margin in pixels for each photo by css
    - Default: 1
 - padding
-   - set padding in pixel for each photo by css
+   - set padding in pixels for each photo by css
    - Default: 1
 
 

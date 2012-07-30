@@ -10,6 +10,9 @@ E-mail: matteo@22hbg.com
 How to create your Facebook Page? 
 https://www.facebook.com/pages/create.php
 
+How to create Albums?
+https://www.facebook.com/help/?faq=174641285926169
+
 How to get Your page ID?
 http://rieglerova.net/how-to-get-a-facebook-fan-page-id/
 

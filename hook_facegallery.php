@@ -69,24 +69,22 @@ function smarty_facegallery($params, &$smarty)
         
         $thumbw  = getDefault($params['thumbw'], '70');
         $thumbh  = getDefault($params['thumbh'], '70');
-        $rounded = getDefault($params['rounded'], true);
+        $rounded = getDefault($params['rounded'], 0);
         $margin  = getDefault($params['margin'], '1');
         $padding = getDefault($params['padding'], '1');
         $col     = getDefault($params['col'], '3');
         $max     = getDefault($params['max'], '10');
-        $reverse = getDefault($params['reverse'], false);
-        $fancybox = getDefault($params['thickbox'], false);
+        $reverse = getDefault($params['reverse'], 0);
+        $fancybox = getDefault($params['thickbox'], 0);
        
         
         if ($thumbw <= 0) { $thumbw = 70; }
         if ($thumbh <= 0) { $thumbw = 70; }
-        if ($rounded != true || $rounded != false) { $rounded = true; }
         if ($margin <= 0) { $margin = 1; }
         if ($padding <= 0) { $padding = 1; }
         if ($col <= 0) { $col = 3; }
         if ($max <= 0) { $thumbw = -1; }
-        if ($reverse != true || $reverse != false ) { $reverse = false; }
-        if ($fancybox != true || $fancybox != false) { $fancybox = false; }
+        if ($fancybox != 1 || $fancybox != 0) { $fancybox = 0; }
         
         $output = '';
         
@@ -128,12 +126,12 @@ function smarty_facegallery($params, &$smarty)
                 var w = " . $thumbw . ";
                 var h = " . $thumbh . ";
                 var small = photo.source.slice(0,photo.source.length-5) + 's.jpg';
-                var thumb = \"" . $timthumb . "?src=\"+small+\"&w=\"+w+\"&h=\"+h+\"&zc=1&q=90\";                 
+                var thumb = \"" . $timthumb . "?src=\"+small+\"&w=\"+w+\"&h=\"+h+\"&zc=3&q=90\";                 
             ";
             
-            if (!$reverse) {
+            if ($reverse == 0) {
                             $output .= "\nlist.append(jQuery('<a></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
-                            $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";                    
+                            $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";           
             } else {
                             $output .= "\nlist.prepend(jQuery('<a></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
                             $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";          
@@ -151,7 +149,7 @@ function smarty_facegallery($params, &$smarty)
         
         
         
-        if ($rounded == true) {
+        if ($rounded == 1) {
                 $output .= "jQuery('img#photo_'+i).css('border-radius', '6px');";
         } //$rounded
         
@@ -197,6 +195,29 @@ function facegalleryAdmin(&$form_html)
         $form = $PIVOTX['extensions']->getAdminForm('facegallery');
         
         $form->add(array(
+                'type' => 'custom',
+                'text' => '
+                <pre>
+                 Based on:
+                 
+                 /*
+                 * Facebook Page Photos (for jQuery)
+                 * version: 1.0
+                 * @requires jQuery v1.7 or later
+                 * @homepage https://github.com/carlsverre/jquery-facebook-page-photos
+                 *
+                 * Licensed under the MIT:
+                 *   http://www.opensource.org/licenses/mit-license.php
+                 *
+                 * Copyright 2011 Carl Sverre
+                 */
+                 
+                 Thank You Carl!
+                </pre><div id="#photos"></div>
+                '
+        ));
+        
+        $form->add(array(
                 'type' => 'text',
                 'name' => 'facegallery_page_id',
                 'label' => __('Page ID/Name'),
@@ -214,10 +235,17 @@ function facegalleryAdmin(&$form_html)
                 'label' => __('Album ID')
         ));
         
-
         $form->add(array(
                 'type' => 'hidden',
                 'name' => 'facegallery_album_id'
+        ));
+        
+        $form->add(array(
+        	'type' => 'textarea',
+        	'name' => 'errortext',
+        	'label' => 'Error:',
+        	'value' => '',
+        	'size' => 80
         ));
         
         $form->add(array(
@@ -247,7 +275,7 @@ function facegalleryAdmin(&$form_html)
       
             }
             , error: function(msg) {
-                console.error("FB Error:", msg.message);
+                jQuery(\'#errortext\').val("FB Error: " + msg.message);
                 
                 
             }
@@ -256,47 +284,31 @@ function facegalleryAdmin(&$form_html)
     
     function clearalbum() {
             jQuery(\'select#facegallery_album_sel\').children().remove().end();
+            jQuery(\'#errortext\').val("");
             album();
     }
     
     (function() {
 
-              jQuery(\'#facegallery_page_id\').val(\'' . $configdata['facegallery_page_id'] . '\');
-
+          jQuery(\'#facegallery_page_id\').val(\'' . $configdata['facegallery_page_id'] . '\');
           clearalbum();
           jQuery(\'#facegallery_page_id\').after(\'<div style="display: inline; float: right; margin-right: 250px;" class="buttons"><button type="button" onclick="clearalbum();" id="update_album">OK</button></div>\');
-    
     })();
 
     
 </script>
+<style>
+.formclass textarea#errortext{
+  color: red !important;
+  background: white !important;
+}
+</style>
 '
         ));
+        
+
+        	
         $form->use_javascript(true);
-        
-                $form->add(array(
-                'type' => 'custom',
-                'text' => '<span id="thanks" style="position: absolute; right: 200px;">
-                <pre>
-                 Based on:
-                 
-                 /*
-                 * Facebook Page Photos (for jQuery)
-                 * version: 1.0
-                 * @requires jQuery v1.7 or later
-                 * @homepage https://github.com/carlsverre/jquery-facebook-page-photos
-                 *
-                 * Licensed under the MIT:
-                 *   http://www.opensource.org/licenses/mit-license.php
-                 *
-                 * Copyright 2011 Carl Sverre
-                 */
-                 
-                 Thank You Carl!
-                </pre><div id="#photos"></div>
-                </span>'
-        ));
-        
         $form_html['facegallery'] = $PIVOTX['extensions']->getAdminFormHtml($form, $facegallery_config);
         
 }
