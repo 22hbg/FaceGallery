@@ -73,7 +73,7 @@ function smarty_facegallery($params, &$smarty)
         $col     = getDefault($params['col'], '3');
         $max     = getDefault($params['max'], '10');
         $reverse = getDefault($params['reverse'], 0);
-        $fancybox = getDefault($params['thickbox'], 0);
+        $fancybox = getDefault($params['thickbox'], 1);
        
         
         if ($thumbw <= 0) { $thumbw = 70; }
@@ -82,7 +82,7 @@ function smarty_facegallery($params, &$smarty)
         if ($padding <= 0) { $padding = 1; }
         if ($col <= 0) { $col = 3; }
         if ($max <= 0) { $thumbw = -1; }
-        if ($fancybox != 1 || $fancybox != 0) { $fancybox = 0; }
+        if ($fancybox != 1 || $fancybox != 0) { $fancybox = 1; }
         
         $output = '';
         
@@ -134,13 +134,12 @@ function smarty_facegallery($params, &$smarty)
                             $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";          
             }
             
-            if ($fancybox) { $output .= "\njQuery('a#link_'+i).addClass('gallery_image');"; }
+            if ($fancybox == 1) { $output .= "\njQuery('a.fancybox').fancybox();"; }
             $output .="
             
             
                 jQuery('img#photo_'+i).css('width', w + 'px');
                 jQuery('img#photo_'+i).css('height', h + 'px');
-                jQuery('a.fancybox').fancybox();
                 if(ii==" . $col . "){ list.append(jQuery('<br>')); ii=0; }
                 ";
         
