@@ -13,7 +13,6 @@ $path   = $PIVOTX['paths']['extensions_url'];
 
 /**
 * @params margin string img css margins (default 1)
-* @params padding string img css padding (default 1)
 * @params thumbw string width for thumbs (default to 70)
 * @params thumbh string height for thumbs (default to 70)
 * @params rounded boolean apply rounded corners to thumbs (default true)
@@ -71,7 +70,6 @@ function smarty_facegallery($params, &$smarty)
         $thumbh  = getDefault($params['thumbh'], '70');
         $rounded = getDefault($params['rounded'], 0);
         $margin  = getDefault($params['margin'], '1');
-        $padding = getDefault($params['padding'], '1');
         $col     = getDefault($params['col'], '3');
         $max     = getDefault($params['max'], '10');
         $reverse = getDefault($params['reverse'], 0);
@@ -89,10 +87,10 @@ function smarty_facegallery($params, &$smarty)
         $output = '';
         
         $timthumb = $configdata['pivotx_url'] . 'includes/timthumb.php';
-       
+      
         OutputSystem::instance()->addCode(
-            'fancybox-js-easing',
-            OutputSystem::LOC_BODYSTART,
+            'facegallery',
+            OutputSystem::LOC_HEADEND,
             'script',
             array('src'=>$path.'facegallery/src/jquery.fbpagephotos.min.js','_priority'=>OutputSystem::PRI_NORMAL+20)
         ); 
@@ -100,7 +98,6 @@ function smarty_facegallery($params, &$smarty)
         $output .= "
     <script language=\"javascript\">
 (function() {
-
 
     jQuery.FBPagePhotos({
         page_id: \"" . $configdata['facegallery_page_id'] . "\"
@@ -130,10 +127,10 @@ function smarty_facegallery($params, &$smarty)
             ";
             
             if ($reverse == 0) {
-                            $output .= "\nlist.append(jQuery('<a></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
+                            $output .= "\nlist.append(jQuery('<a class=\"fancybox\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
                             $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";           
             } else {
-                            $output .= "\nlist.prepend(jQuery('<a></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
+                            $output .= "\nlist.prepend(jQuery('<a clas=\"fancybox\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
                             $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";          
             }
             
@@ -143,7 +140,7 @@ function smarty_facegallery($params, &$smarty)
             
                 jQuery('img#photo_'+i).css('width', w + 'px');
                 jQuery('img#photo_'+i).css('height', h + 'px');
-                
+                jQuery('a.fancybox').fancybox();
                 if(ii==" . $col . "){ list.append(jQuery('<br>')); ii=0; }
                 ";
         
@@ -157,10 +154,6 @@ function smarty_facegallery($params, &$smarty)
                 $output .= "\njQuery('img#photo_'+i).css('margin', '" . $margin . "px');";
         } //$margin
         
-        if ($padding) {
-                $output .= "\njQuery('img#photo_'+i).css('padding', '" . $padding . "px');";
-        } //$padding
-        
         $output .= "
 
              ii++;
@@ -170,19 +163,9 @@ function smarty_facegallery($params, &$smarty)
 })();
 </script>
 
-        <div id=\"photos-3\"></div>";
-        
-        if (isset($params['popup'])) {
-                $callback = $params['popup'] . "IncludeCallback";
-                if (function_exists($callback)) {
-                        $PIVOTX['extensions']->addHook('after_parse', 'callback', $callback);
-                } //function_exists($callback)
-                else {
-                        debug("There is no function '$callback' - the popups won't work.");
-                }
-        } //isset($params['popup'])
-        $output .= $params['footer'];
-        
+        <div id=\"photos-3\"></div>
+        ";
+
         return entifyAmpersand($output);
         
 }
@@ -257,7 +240,7 @@ function facegalleryAdmin(&$form_html)
     function album() {
               var facegallery_val = jQuery(\'#facegallery_page_id\').val();
     
-          jQuery(\'#facegallery_album_sel\').FBPagePhotos({
+          jQuery(\'select#facegallery_album_sel\').FBPagePhotos({
               page_id: facegallery_val
             , albums_cb: function(albums, next) {
                 var select = jQuery(\'#facegallery_album_sel\');
@@ -282,18 +265,30 @@ function facegalleryAdmin(&$form_html)
           });
     }
     
+    function showload() {
+            //jQuery(\'img#waitimg\').css(\'visibility\',\'visible\');
+            jQuery(\'img#waitimg\').hide().show("fast");
+    }
+
+    function hideload() {
+            //jQuery(\'img#waitimg\').css(\'visibility\',\'hidden\');
+            jQuery(\'img#waitimg\').show().hide("fast");
+    }
+
     function clearalbum() {
             jQuery(\'select#facegallery_album_sel\').children().remove().end();
             jQuery(\'#errortext\').val("");
-            album();
+	    album();
     }
     
     (function() {
 
           jQuery(\'#facegallery_page_id\').val(\'' . $configdata['facegallery_page_id'] . '\');
           clearalbum();
-          jQuery(\'#facegallery_page_id\').after(\'<div style="display: inline; float: right; margin-right: 250px;" class="buttons"><button type="button" onclick="clearalbum();" id="update_album">OK</button></div>\');
-    })();
+          jQuery(\'#facegallery_page_id\').after(\'<div style="display: inline; float: right; margin-right: 250px;" class="buttons"><button type="button" onclick="showload();clearalbum();hideload();" id="update_album">OK</button></div>\');
+          jQuery(\'select#facegallery_album_sel\').after(\'<img id="waitimg" src="' . $path . '/facegallery/wait.gif" />\');
+          hideload();    
+})();
 
     
 </script>
