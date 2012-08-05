@@ -41,7 +41,6 @@ $facegallery_config = array(
         
 
 
-//$PIVOTX['template']->register_block('facegallery', 'smarty_facegallery');
 $PIVOTX['template']->register_function('facegallery', 'smarty_facegallery');
 
 $this->addHook('configuration_add', 'facegallery', array(
@@ -58,14 +57,12 @@ function smarty_facegallery($params, &$smarty)
         global $facegallery_config;
         global $path;
         global $configdata;     
-
-        
         $params = cleanParams($params);
-        
         
         $vars    = $smarty->get_template_vars();
         $content = getDefault($vars['page'], $vars['entry']);
-        
+       
+ 
         $thumbw  = getDefault($params['thumbw'], '70');
         $thumbh  = getDefault($params['thumbh'], '70');
         $rounded = getDefault($params['rounded'], 0);
@@ -73,16 +70,13 @@ function smarty_facegallery($params, &$smarty)
         $col     = getDefault($params['col'], '3');
         $max     = getDefault($params['max'], '10');
         $reverse = getDefault($params['reverse'], 0);
-        $fancybox = getDefault($params['thickbox'], 1);
+        $fancybox = getDefault($params['fancybox'], 0);
        
-        
         if ($thumbw <= 0) { $thumbw = 70; }
         if ($thumbh <= 0) { $thumbw = 70; }
         if ($margin <= 0) { $margin = 1; }
-        if ($padding <= 0) { $padding = 1; }
         if ($col <= 0) { $col = 3; }
-        if ($max <= 0) { $thumbw = -1; }
-        if ($fancybox != 1 || $fancybox != 0) { $fancybox = 1; }
+        if ($max <= 0) { $max = -1; }
         
         $output = '';
         
@@ -134,7 +128,8 @@ function smarty_facegallery($params, &$smarty)
                             $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";          
             }
             
-            if ($fancybox == 1) { $output .= "\njQuery('a.fancybox').fancybox();"; }
+            
+            if ($fancybox) { $output .= "\njQuery('a.fancybox').fancybox();"; }
             $output .="
             
             
