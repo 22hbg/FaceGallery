@@ -260,13 +260,11 @@ function facegalleryAdmin(&$form_html)
     }
     
     function showload() {
-            //jQuery(\'img#waitimg\').css(\'visibility\',\'visible\');
-            jQuery(\'img#waitimg\').hide().show("fast");
+            jQuery(\'img#waitimg\').css(\'visibility\',\'visible\');
     }
 
     function hideload() {
-            //jQuery(\'img#waitimg\').css(\'visibility\',\'hidden\');
-            jQuery(\'img#waitimg\').show().hide("fast");
+            jQuery(\'img#waitimg\').css(\'visibility\',\'hidden\');
     }
 
     function clearalbum() {
@@ -280,7 +278,7 @@ function facegalleryAdmin(&$form_html)
           jQuery(\'#facegallery_page_id\').val(\'' . $configdata['facegallery_page_id'] . '\');
           clearalbum();
           jQuery(\'#facegallery_page_id\').after(\'<div style="display: inline; float: right; margin-right: 250px;" class="buttons"><button type="button" onclick="showload();clearalbum();hideload();" id="update_album">OK</button></div>\');
-          jQuery(\'select#facegallery_album_sel\').after(\'<img id="waitimg" src="' . $path . '/facegallery/wait.gif" />\');
+          jQuery(\'select#facegallery_album_sel\').after(\'<img style="display: block; z-index: 999" id="waitimg" src="' . $path . '/facegallery/wait.gif" />\');
           hideload();    
 })();
 
