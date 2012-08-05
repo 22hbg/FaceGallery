@@ -4,39 +4,38 @@ Facebook Gallery
 This extension allows you to insert a Facebook Page Gallery on your pages and
 entries. 
 
-Required: Facebook Page, JQuery 1.7
+Required: A Facebook Page, JQuery 1.7, Fancybox
 
-How to create your Facebook Page? 
-https://www.facebook.com/pages/create.php
+How to create your Facebook Page? <br />
+https://www.facebook.com/pages/create.php <br />
 
-How to create Albums?
-https://www.facebook.com/help/?faq=174641285926169
+How to create Albums? <br />
+https://www.facebook.com/help/?faq=174641285926169 <br />
 
-How to get Your page ID?
-http://rieglerova.net/how-to-get-a-facebook-fan-page-id/
+How to get Your page ID? <br />
+http://rieglerova.net/how-to-get-a-facebook-fan-page-id/ <br />
 
 IMPORTANT: You have to ensure ALLOW_EXTERNAL is set to TRUE in /pivotx/includes/timthumb.php (pivotx default is true) and
            add the following lines to the end of your /pivotx/includes/timthumb-config.php
 
-
+ <br />
 *********************************************
-// Extension FaceGallery add fbcdn.net:
-$ALLOWED_SITES = array (
-'flickr.com',
-'staticflickr.com',
-'picasa.com',
-'img.youtube.com',
-'upload.wikimedia.org',
-'photobucket.com',
-'imgur.com',
-'imageshack.us',
-'tinypic.com',
-'fbcdn.net',
-);
+// Extension FaceGallery add fbcdn.net: <br />
+$ALLOWED_SITES = array ( <br />
+       'flickr.com', <br />
+       'staticflickr.com', <br />
+       'picasa.com', <br />
+       'img.youtube.com', <br />
+       'upload.wikimedia.org', <br />
+       'photobucket.com', <br />
+       'imgur.com', <br />
+       'imageshack.us', <br />
+       'tinypic.com', <br />
+       'fbcdn.net', <br />
+       ); <br />
 *********************************************
 
-
-Installation:
+Installation
 ======================
 Unzip and copy to directory /pivotx/extensions/facegallery
 
@@ -73,8 +72,6 @@ The available parameters are:
 - margin
    - set margin in pixels for each photo by css
    - Default: 1
-- padding
-   - set padding in pixels for each photo by css
-   - Default: 1
-
-
+- fancybox
+   - set fancybox animation
+   - Default: true
