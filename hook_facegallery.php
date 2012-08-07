@@ -100,7 +100,7 @@ function smarty_facegallery($params, &$smarty)
         }
         , photos_cb: function(photos) {
             var e = jQuery('#photos-3')
-                , list = jQuery('<ul></ul>')
+                , list = jQuery('<ul id=\"pic_list\"></ul><span id=\"error\"></span>')
                 , img = jQuery('<img>');
 
             e.append(list, img);
@@ -125,6 +125,7 @@ $activext = explode('|',$vars['config']['extensions_active']);
 foreach ($activext as $exte) {
 	if ($exte == "fancybox") { $fancybox = true; }
 }
+
  
             if ($reverse == 0) {
                             $output .= "\nlist.append(jQuery('<a class=\"fancybox\" title=\"\" alt=\"\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
@@ -146,6 +147,23 @@ foreach ($activext as $exte) {
                 if(ii==" . $col . "){ list.append(jQuery('<br>')); ii=0; }
                 ";
         
+
+	if ($popup) {
+	    if ($fancybox) {
+
+$output .= "
+
+
+if(jQuery().fancybox) { 
+	jQuery(\"a.fancybox\").fancybox(); 
+}
+else { 
+	jQuery('#error').html('You have to add [[ fancybox_setup ]] to your template.'); 
+}";
+	    } else {
+			$output .= "\njQuery('a.fancybox').removeClass('fancybox').addClass('thickbox');";
+	    }
+	}
         
         
         if ($rounded == 1) {
@@ -164,22 +182,22 @@ foreach ($activext as $exte) {
         }
 
     });
+
 })();
+
+
+";
+
+
+
+$output .= "
+
 </script>
 
         <div id=\"photos-3\"></div>
         ";
 
 
-	if ($popup) {
-            $output .= "<script>";
-	    if ($fancybox) {
-			$output .= "if(typeof window.fancybox == 'function') { \njQuery('a.fancybox').fancybox(); \n} else { \nalert('You have to add [[ fancybox_setup ]] to your template.'); \n}";
-	    } else {
-			$output .= "\njQuery('a.fancybox').removeClass('fancybox').addClass('thickbox');";
-	    }
-            $output .= "</script>";
-	}
 
         return entifyAmpersand($output);
         
