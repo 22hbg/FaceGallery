@@ -72,7 +72,7 @@ function smarty_facegallery($params, &$smarty)
         $reverse = getDefault($params['reverse'], 0);
         $popup = getDefault($params['popup'], 0);
         
-	if ($thumbw <= 0) { $thumbw = 70; }
+        if ($thumbw <= 0) { $thumbw = 70; }
         if ($thumbh <= 0) { $thumbw = 70; }
         if ($margin <= 0) { $margin = 1; }
         if ($col <= 0) { $col = 3; }
@@ -90,8 +90,7 @@ function smarty_facegallery($params, &$smarty)
         ); 
         
         $output .= "
-    <script language=\"javascript\">
-(function() {
+  (function() {
 
     jQuery.FBPagePhotos({
         page_id: \"" . $configdata['facegallery_page_id'] . "\"
@@ -119,11 +118,11 @@ function smarty_facegallery($params, &$smarty)
                 var small = photo.source.slice(0,photo.source.length-5) + 's.jpg';
                 var thumb = \"" . $timthumb . "?src=\"+small+\"&w=\"+w+\"&h=\"+h+\"&zc=3&q=90\";                 
             ";
-	            
+                    
 $fancybox = false;
 $activext = explode('|',$vars['config']['extensions_active']);
 foreach ($activext as $exte) {
-	if ($exte == "fancybox") { $fancybox = true; }
+        if ($exte == "fancybox") { $fancybox = true; }
 }
 
  
@@ -148,22 +147,22 @@ foreach ($activext as $exte) {
                 ";
         
 
-	if ($popup) {
-	    if ($fancybox) {
+        if ($popup) {
+            if ($fancybox) {
 
 $output .= "
 
 
 if(jQuery().fancybox) { 
-	jQuery(\"a.fancybox\").fancybox(); 
+        jQuery(\"a.fancybox\").fancybox(); 
 }
 else { 
-	jQuery('#error').html('You have to add [[ fancybox_setup ]] to your template.'); 
+        jQuery('#error').html('You have to add [[ fancybox_setup ]] to your template.'); 
 }";
-	    } else {
-			$output .= "\njQuery('a.fancybox').removeClass('fancybox').addClass('thickbox');";
-	    }
-	}
+            } else {
+                        $output .= "\njQuery('a.fancybox').removeClass('fancybox').addClass('thickbox');";
+            }
+        }
         
         
         if ($rounded == 1) {
@@ -189,17 +188,18 @@ else {
 ";
 
 
-
-$output .= "
-
-</script>
-
-        <div id=\"photos-3\"></div>
-        ";
+$html = "<div id=\"photos-3\"></div>";
 
 
+        OutputSystem::instance()->addCode(
+            'facegallery_custom',
+            OutputSystem::LOC_HEADEND,
+            'script',
+            array('_priority'=>OutputSystem::PRI_NORMAL+20),
+            $output
+        ); 
 
-        return entifyAmpersand($output);
+        return entifyAmpersand($html);
         
 }
 
@@ -257,11 +257,11 @@ function facegalleryAdmin(&$form_html)
         ));
         
         $form->add(array(
-        	'type' => 'textarea',
-        	'name' => 'errortext',
-        	'label' => 'Error:',
-        	'value' => '',
-        	'size' => 80
+                'type' => 'textarea',
+                'name' => 'errortext',
+                'label' => 'Error:',
+                'value' => '',
+                'size' => 80
         ));
         
         $form->add(array(
@@ -309,7 +309,7 @@ function facegalleryAdmin(&$form_html)
     function clearalbum() {
             jQuery(\'select#facegallery_album_sel\').children().remove().end();
             jQuery(\'#errortext\').val("");
-	    album();
+            album();
     }
     
     (function() {
@@ -333,7 +333,7 @@ function facegalleryAdmin(&$form_html)
         ));
         
 
-        	
+                
         $form->use_javascript(true);
         $form_html['facegallery'] = $PIVOTX['extensions']->getAdminFormHtml($form, $facegallery_config);
         
