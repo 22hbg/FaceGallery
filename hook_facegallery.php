@@ -194,7 +194,7 @@ $html = "<div id=\"photos-3\"></div>";
 
         OutputSystem::instance()->addCode(
             'facegallery_custom',
-            OutputSystem::LOC_HEADEND,
+            OutputSystem::LOC_BODYEND,
             'script',
             array('_priority'=>OutputSystem::PRI_NORMAL+20),
             $output
