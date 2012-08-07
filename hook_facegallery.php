@@ -29,6 +29,7 @@ $facegallery_config = array(
         
 );
         
+
         $configdata = $PIVOTX['config']->getConfigArray();
         foreach ($facegallery_config as $key => $value) {
                 if (isset($configdata[$key])) {
