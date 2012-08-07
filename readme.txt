@@ -1,7 +1,7 @@
 FaceGallery for PivotX
 
-Version: 0.2
-Date: 2012-07-27
+Version: 0.3
+Date: 2012-08-07
 Requirements: PivotX 2.3.3, a Facebook Public Page 
 
 Author: Matteo Tumidei
@@ -45,6 +45,11 @@ Unzip and copy to directory /pivotx/extensions/facegallery
 
 
 ChangeLog:
+
+0.3 - 2012-08-07
+	Added checks on vars
+	Fixed fancybox functions
+	Improved settings page
 
 0.2 - 2012-07-27
         Changed Block to Function

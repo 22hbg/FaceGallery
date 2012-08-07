@@ -47,6 +47,9 @@ This will insert the default gallery, with the default options selected.
     [[ facegallery col=3 max=10 ]]
 
 
+If you want to use fancybox for popups, please add [[ fancybox_setup ]] in your template.
+See FancyBox docs for more details.
+
 Parameters
 ======================
 The available parameters are:
@@ -74,4 +77,4 @@ The available parameters are:
    - Default: 1
 - fancybox
    - set fancybox animation
-   - Default: true
+   - Default: false

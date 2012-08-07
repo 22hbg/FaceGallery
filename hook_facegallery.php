@@ -1,11 +1,11 @@
 <?php
 // - Extension: Facebook Gallery 
 // - Identifier: facegallery
-// - Version: 0.2
+// - Version: 0.3
 // - Author: Matteo Tumidei
 // - Email: matteo@22hbg.com
 // - Description: Make gallery of images from facebook album Derived from Dir Gallery extension.
-// - Date: 2012-07-27           
+// - Date: 2012-08-07           
 global $facegallery_config;
 global $path;
 global $configdata;
@@ -19,7 +19,7 @@ $path   = $PIVOTX['paths']['extensions_url'];
 * @params col integer count of column (default 3)
 * @params max integer max count of pictures (default 10)
 * @params reverse boolean display pics in reverse order (default false)
-* @params fancybox boolean use thinkbox for popups (default false)
+* @params popup boolean use fancybox for popups (default false)
 */
 
 $facegallery_config = array(
@@ -70,9 +70,9 @@ function smarty_facegallery($params, &$smarty)
         $col     = getDefault($params['col'], '3');
         $max     = getDefault($params['max'], '10');
         $reverse = getDefault($params['reverse'], 0);
-        $fancybox = getDefault($params['fancybox'], 0);
-       
-        if ($thumbw <= 0) { $thumbw = 70; }
+        $popup = getDefault($params['popup'], 0);
+        
+	if ($thumbw <= 0) { $thumbw = 70; }
         if ($thumbh <= 0) { $thumbw = 70; }
         if ($margin <= 0) { $margin = 1; }
         if ($col <= 0) { $col = 3; }
@@ -119,17 +119,32 @@ function smarty_facegallery($params, &$smarty)
                 var small = photo.source.slice(0,photo.source.length-5) + 's.jpg';
                 var thumb = \"" . $timthumb . "?src=\"+small+\"&w=\"+w+\"&h=\"+h+\"&zc=3&q=90\";                 
             ";
-            
+	            
+$fancybox = false;
+$activext = explode('|',$vars['config']['extensions_active']);
+foreach ($activext as $exte) {
+	if ($exte == "fancybox") { $fancybox = true; }
+}
+ 
             if ($reverse == 0) {
-                            $output .= "\nlist.append(jQuery('<a class=\"fancybox\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
+                            $output .= "\nlist.append(jQuery('<a class=\"fancybox\" title=\"\" alt=\"\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
                             $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";           
             } else {
-                            $output .= "\nlist.prepend(jQuery('<a clas=\"fancybox\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
+                            $output .= "\nlist.prepend(jQuery('<a class=\"fancybox\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
                             $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";          
             }
-            
-            
-            if ($fancybox) { $output .= "\njQuery('a.fancybox').fancybox();"; }
+           
+
+
+
+	if ($popup) {
+            if ($fancybox) {
+			$output .= "\njQuery('a.fancybox').fancybox();";
+	    } else {
+			$output .= "\njQuery('a.fancybox').removeClass('fancybox').addClass('thickbox');";
+	    }
+	}
+
             $output .="
             
             
