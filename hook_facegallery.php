@@ -137,13 +137,6 @@ foreach ($activext as $exte) {
 
 
 
-	if ($popup) {
-            if ($fancybox) {
-			$output .= "\njQuery('a.fancybox').fancybox();";
-	    } else {
-			$output .= "\njQuery('a.fancybox').removeClass('fancybox').addClass('thickbox');";
-	    }
-	}
 
             $output .="
             
@@ -167,13 +160,26 @@ foreach ($activext as $exte) {
 
              ii++;
             });
+
         }
+
     });
 })();
 </script>
 
         <div id=\"photos-3\"></div>
         ";
+
+
+	if ($popup) {
+            $output .= "<script>";
+	    if ($fancybox) {
+			$output .= "if(typeof window.fancybox == 'function') { \njQuery('a.fancybox').fancybox(); \n} else { \nalert('You have to add [[ fancybox_setup ]] to your template.'); \n}";
+	    } else {
+			$output .= "\njQuery('a.fancybox').removeClass('fancybox').addClass('thickbox');";
+	    }
+            $output .= "</script>";
+	}
 
         return entifyAmpersand($output);
         
