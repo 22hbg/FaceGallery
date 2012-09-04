@@ -15,8 +15,7 @@ How to create Albums? <br />
 How to get Your page ID? <br />
 <http://rieglerova.net/how-to-get-a-facebook-fan-page-id/> <br />
 
-IMPORTANT: You have to ensure ALLOW_EXTERNAL is set to TRUE in /pivotx/includes/timthumb.php (pivotx default is true) and
-           add the following lines to the end of your /pivotx/includes/timthumb-config.php
+IMPORTANT: You have to ensure ALLOW_EXTERNAL is set to TRUE in /pivotx/includes/timthumb.php (pivotx default is true) and add the following lines to the end of your /pivotx/includes/timthumb-config.php
 
  <br />
 *********************************************
@@ -44,7 +43,7 @@ Usage
 To use the gallery in its simplest form, just add [[facegallery]] to your template or directly in an entry or page.
 This will insert the default gallery, with the default options selected.
 
-    [[ facegallery col=3 max=10 ]]
+    [[ facegallery col=3 max=9 ]]
 
 
 If you want to use fancybox for popups, please add [[ fancybox_setup ]] in your template.
