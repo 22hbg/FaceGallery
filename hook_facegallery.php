@@ -132,7 +132,7 @@ foreach ($activext as $exte) {
 
  
             if ($reverse == 0) {
-                            $output .= "\nlist.append(jQuery('<a class=\"fancybox\" title=\"'+photo.name+'\" alt=\"'+photo.name+'\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
+                            $output .= "\nlist.append(jQuery('<a class=\"fancybox\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
                             $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";           
             } else {
                             $output .= "\nlist.prepend(jQuery('<a class=\"fancybox\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
