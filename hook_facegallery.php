@@ -65,7 +65,7 @@ function smarty_facegallery($params, &$smarty)
        
  
         $thumbw  = getDefault($params['thumbw'], '70');
-        $thumbh  = getDefault($params['thumbh'], '70');
+        $thumbh  = getDefault($params['thumbh'], '');
         $rounded = getDefault($params['rounded'], 0);
         $margin  = getDefault($params['margin'], '1');
         $col     = getDefault($params['col'], '3');
@@ -91,7 +91,8 @@ function smarty_facegallery($params, &$smarty)
         ); 
         
         $output .= "
-  (function() {
+<!--   
+    (function() {
 
     jQuery.FBPagePhotos({
         page_id: \"" . $configdata['facegallery_page_id'] . "\"
@@ -117,7 +118,10 @@ function smarty_facegallery($params, &$smarty)
                 var w = " . $thumbw . ";
                 var h = " . $thumbh . ";
                 var small = photo.source.slice(0,photo.source.length-5) + 's.jpg';
-                var thumb = \"" . $timthumb . "?src=\"+small+\"&w=\"+w+\"&h=\"+h+\"&zc=3&q=90\";                 
+                var thumb = \"" . $timthumb . "?src=\"+small
+                    thumb += \"&w=\"+w;
+                    if(h>0) { thumb += \"&h=\"+h; }
+                    if(h>0) { thumb += \"&zc=1&q=90\"; } else { thumb += \"&zc=3&q=90\"; }                 
             ";
                     
 $fancybox = false;
@@ -128,7 +132,7 @@ foreach ($activext as $exte) {
 
  
             if ($reverse == 0) {
-                            $output .= "\nlist.append(jQuery('<a class=\"fancybox\" title=\"\" alt=\"\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
+                            $output .= "\nlist.append(jQuery('<a class=\"fancybox\" title=\"'+photo.name+'\" alt=\"'+photo.name+'\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
                             $output .= "\njQuery('#link_'+i).prepend(jQuery('<img>').attr('id', 'photo_'+i).attr('src', thumb));";           
             } else {
                             $output .= "\nlist.prepend(jQuery('<a class=\"fancybox\" rel=\"FaceGallery\"></a>').attr('id', 'link_'+i).attr('href', photo.source).attr('target', '_blank'));";
@@ -156,6 +160,7 @@ $output .= "
 
 if(jQuery().fancybox) { 
         jQuery(\"a.fancybox\").fancybox(); 
+	jQuery('#error').html('');
 }
 else { 
         jQuery('#error').html('You have to add [[ fancybox_setup ]] to your template.'); 
@@ -185,7 +190,7 @@ else {
 
 })();
 
-
+// -->
 ";
 
 

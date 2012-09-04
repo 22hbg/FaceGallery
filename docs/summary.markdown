@@ -7,13 +7,13 @@ entries.
 Required: A Facebook Page, JQuery 1.7, Fancybox
 
 How to create your Facebook Page? <br />
-https://www.facebook.com/pages/create.php <br />
+<https://www.facebook.com/pages/create.php> <br />
 
 How to create Albums? <br />
-https://www.facebook.com/help/?faq=174641285926169 <br />
+<https://www.facebook.com/help/?faq=174641285926169> <br />
 
 How to get Your page ID? <br />
-http://rieglerova.net/how-to-get-a-facebook-fan-page-id/ <br />
+<http://rieglerova.net/how-to-get-a-facebook-fan-page-id/> <br />
 
 IMPORTANT: You have to ensure ALLOW_EXTERNAL is set to TRUE in /pivotx/includes/timthumb.php (pivotx default is true) and
            add the following lines to the end of your /pivotx/includes/timthumb-config.php
@@ -48,7 +48,7 @@ This will insert the default gallery, with the default options selected.
 
 
 If you want to use fancybox for popups, please add [[ fancybox_setup ]] in your template.
-See FancyBox docs for more details.
+See <http://www.fancybox.net/> for more details.
 
 Parameters
 ======================
